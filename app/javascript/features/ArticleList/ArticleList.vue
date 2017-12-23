@@ -26,7 +26,7 @@ export default {
   computed: {
     ...mapGetters(['articles']),
     showEmptyList () {
-      return isEmpty(this.  articles)
+      return isEmpty(this.articles)
     }
   },
   methods: {

@@ -46,7 +46,7 @@
         return moment(this.article.date).fromNow()
       },
       commentsCount () {
-        return this.article.comments.length
+        return 42
       },
       articleDescription () {
         return truncate(this.article.content, { length: 400 })
