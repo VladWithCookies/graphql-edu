@@ -37,7 +37,7 @@ export default {
   computed: {
     ...mapGetters(['article']),
     commentCount () {
-      return this.article.comments.length
+      return 42
     }
   },
   components: {
