@@ -24,6 +24,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'listen'
   gem 'pry'
   gem 'rspec-rails', '~> 3.6'
   gem 'rails-controller-testing'

@@ -1,10 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import state from './state'
-import mutations from './mutations'
+import { injectSupply } from 'vue-supply'
 import getters from './getters'
-import actions from './actions'
+import mutations from './mutations'
+import supply from './supply'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({ state, mutations, getters, actions })
+export const supplyCache = {}
+
+const storeOptions = { supply, getters, mutations }
+const finalOptions = injectSupply(storeOptions, supplyCache)
+
+export default new Vuex.Store(finalOptions)

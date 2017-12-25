@@ -43,7 +43,7 @@
     props: ['article', 'deleteArticle'],
     computed: {
       timeSinceCreation () {
-        return moment(this.article.date).fromNow()
+        return moment(this.article.create_at).fromNow()
       },
       commentsCount () {
         return 42

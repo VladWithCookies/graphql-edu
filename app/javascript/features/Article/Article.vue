@@ -28,16 +28,21 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { use } from 'vue-supply'
 import ArticleLayout from 'components/ArticleLayout'
 import CommentForm from './CommentForm'
 import Statistic from './Statistic'
 import Comment from './Comment'
 
 export default {
+  mixins: [use('Articles')],
   computed: {
-    ...mapGetters(['article']),
+    ...mapGetters({
+      article: 'article',
+      loading: 'articleLoading'
+    }),
     commentCount () {
-      return 42
+      return 42 //FIXME:
     }
   },
   components: {
