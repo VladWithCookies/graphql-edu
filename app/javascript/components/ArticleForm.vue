@@ -1,6 +1,6 @@
 <template>
   <div class='ui form'>
-    <div class='ui fluid image'>
+    <div v-if='article.imageSrc' class='ui fluid image'>
       <img :src='article.imageSrc' />
     </div>
     <div class='file-input'>

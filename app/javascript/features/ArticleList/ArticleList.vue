@@ -12,6 +12,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { use } from 'vue-supply'
 import { isEmpty } from 'lodash'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleCard from './ArticleCard'
@@ -23,8 +24,12 @@ export default {
     ArticleCard,
     EmptyList,
   },
+  mixins: [use('Articles')],
   computed: {
-    ...mapGetters(['articles']),
+    ...mapGetters({
+      articles: 'allArticles',
+      loading: 'articlesLoading',
+    }),
     showEmptyList () {
       return isEmpty(this.articles)
     }

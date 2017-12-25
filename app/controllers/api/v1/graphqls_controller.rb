@@ -1,5 +1,5 @@
 class Api::V1::GraphqlsController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def create
     query_string = params[:query]
