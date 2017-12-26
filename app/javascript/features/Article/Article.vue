@@ -1,14 +1,14 @@
 <template>
   <article-layout>
     <div class='ui'>
-      <div class='ui fluid image'>
+      <!--<div class='ui fluid image'>
         <img :src='article.imageSrc' />
-      </div>
+      </div>-->
       <div class='ui divider' />
       <div class='ui grid'>
-        <statistic label='Views' :value='368' />
-        <statistic label='Likes' :value='42' />
-        <statistic label='Comments' :value='commentCount' />
+        <statistic label='Views' :value='"N/A"' />
+        <statistic label='Likes' :value='article.likes.length' />
+        <statistic label='Comments' :value='commentsCount' />
       </div>
       <div class='ui divider' />
       <div class='ui header'>{{article.title}}</div>
@@ -27,22 +27,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import { use } from 'vue-supply'
+import { article } from 'graphql/articles'
 import ArticleLayout from 'components/ArticleLayout'
 import CommentForm from './CommentForm'
 import Statistic from './Statistic'
 import Comment from './Comment'
 
 export default {
-  mixins: [use('Articles')],
+  apollo: {
+    article: {
+      query: article,
+      variables () {
+        return { id: this.id }
+      }
+    }
+  },
   computed: {
-    ...mapGetters({
-      article: 'article',
-      loading: 'articleLoading'
-    }),
-    commentCount () {
-      return 42 //FIXME:
+    id () {
+      return this.$route.params.id
     }
   },
   components: {
