@@ -19,7 +19,7 @@
     <div class='extra content'>
       <span class='left floated'>
         <i class='like icon'></i>
-        42
+        {{likesCount}}
       </span>
       <span class='ml-10'>
         <i class='comment icon' />
@@ -46,6 +46,9 @@
         return moment(this.article.created_at).fromNow()
       },
       commentsCount () {
+        return 42
+      },
+      likesCount () {
         return 42
       },
       articleDescription () {

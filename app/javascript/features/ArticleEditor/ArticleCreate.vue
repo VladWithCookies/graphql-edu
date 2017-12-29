@@ -14,6 +14,12 @@ import ArticleLayout from 'components/ArticleLayout'
 import ArticleForm from 'components/ArticleForm'
 
 export default {
+  data: () => ({
+    newArticle: {
+      content: '',
+      title: ''
+    }
+  }),
   components: {
     ArticleLayout,
     ArticleForm,
@@ -25,7 +31,7 @@ export default {
       if (!newArticle.content || !newArticle.title) return
     },
     resetNewArticle() {
-
+      this.newArticle = { content: '', title: '' }
     }
   }
 }

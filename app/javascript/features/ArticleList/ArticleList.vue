@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { allArticles } from 'graphql/articles'
+import { articles } from 'graphql/articles'
 import { isEmpty } from 'lodash'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleCard from './ArticleCard'
@@ -21,14 +21,12 @@ import EmptyList from 'components/EmptyList'
 import Loader from 'components/Loader'
 
 export default {
-  data () {
-    return {
-      loading: 0
-    }
-  },
+  data: () => ({
+    loading: 0
+  }),
   apollo: {
     articles: {
-      query: allArticles,
+      query: articles,
     }
   },
   components: {

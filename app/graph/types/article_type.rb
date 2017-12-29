@@ -13,4 +13,8 @@ ArticleType = GraphQL::ObjectType.define do
   field :likes, !types[LikeType] do
     resolve -> (article, args, ctx) { article.likes }
   end
+
+  field :comments, !types[CommentType] do
+    resolve -> (article, args, ctx) { article.comments }
+  end
 end

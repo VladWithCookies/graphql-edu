@@ -1,6 +1,7 @@
 <template>
   <article-layout>
-    <div class='ui'>
+    <loader v-if='loading' />
+    <div v-else class='ui'>
       <!--<div class='ui fluid image'>
         <img :src='article.imageSrc' />
       </div>-->
@@ -8,7 +9,7 @@
       <div class='ui grid'>
         <statistic label='Views' :value='"N/A"' />
         <statistic label='Likes' :value='article.likes.length' />
-        <statistic label='Comments' :value='commentsCount' />
+        <statistic label='Comments' :value='"N/A"' />
       </div>
       <div class='ui divider' />
       <div class='ui header'>{{article.title}}</div>
@@ -32,8 +33,12 @@ import ArticleLayout from 'components/ArticleLayout'
 import CommentForm from './CommentForm'
 import Statistic from './Statistic'
 import Comment from './Comment'
+import Loader from 'components/Loader'
 
 export default {
+  data: () => ({
+    loading: 0
+  }),
   apollo: {
     article: {
       query: article,
@@ -52,6 +57,7 @@ export default {
     CommentForm,
     Statistic,
     Comment,
+    Loader,
   }
 }
 </script>

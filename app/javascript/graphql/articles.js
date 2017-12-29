@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const allArticles = gql`
+export const articles = gql`
   {
     articles {
       id
@@ -22,6 +22,14 @@ export const article = gql`
           last_name
         }
       }
+    }
+  }
+`
+export const editArticle = gql`
+  query article ($id: ID!) {
+    article(id: $id) {
+      title
+      content
     }
   }
 `

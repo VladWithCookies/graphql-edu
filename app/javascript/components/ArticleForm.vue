@@ -1,8 +1,8 @@
 <template>
   <div class='ui form'>
-    <div v-if='article.imageSrc' class='ui fluid image'>
+    <!--<div v-if='article.imageSrc' class='ui fluid image'>
       <img :src='article.imageSrc' />
-    </div>
+    </div>-->
     <div class='file-input'>
       <label for='file' class='ui icon button'>
         <i class='file icon' />

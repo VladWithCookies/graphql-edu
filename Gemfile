@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'omniauth'
 gem 'devise'
+gem 'devise_token_auth'
 gem 'graphql'
 gem 'webpacker'
 gem 'foreman'

@@ -19,6 +19,11 @@
 
 <script>
 export default {
+  data: () => ({
+    newComment: {
+      content: ''
+    }
+  }),
   methods: {
     createComment () {
       const newComment = this.newComment
