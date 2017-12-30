@@ -4,8 +4,75 @@
 ### REST
 REST in rails has sepparate controller for each resource and ```index```, ```show```, ```create```, ```update```, ```destroy``` actions.
 ```ruby
+class ArticlesController < ApplicationController
+  before_action :find_article, except: %I(index create)
+
+  def index
+    @articles = Article.all
+    render json: @articles.includes(:user, :comments)
+  end
+
+  def show
+    render json: @article.includes(:user, :comments)
+  end
+
+  def create
+    article = Article.create!(article_params)
+    render json: article
+  end
+
+  def update
+    @article.update!(article_params)
+    render json: article
+  end
+
+  def destory
+    @article.destroy
+  end
+
+  private
+
+  def find_article
+    @article = Article.find(params[:id])
+  end
+
+  def articles_params
+    params.permit(:title, :content)
+  end
+end
+```
+
+```ruby
+class CommentsController < ApplicationController
+  def create
+    comment = Comment.create!(comment_params)
+    render json: comment
+  end
+
+  private
+
+  def comment_params
+    params.permit(:content).to_h.merge(
+      user: current_user,
+      article_id: params[:article_id]
+    )
+  end
+end
+```
+
+```ruby
+class LikesController < ApplicationController
+  def create
+    Like.create(user: current_user, article: params[:article_id])
+  end
+
+  def destroy
+    Like.find(params[:like_id])
+  end
+end
 
 ```
+
 ### Graphql
 Graphq in rails has single controller for all api requests and single action.
 ```ruby
@@ -26,12 +93,24 @@ end
 
 ### REST
 ```ruby
+Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
+
+  root to: 'home#index'
+
+  resources :articles, except: :edit do
+    resources :comments, only: %i(create)
+    resources :likes, only: %i(crete destroy)
+  end
+end
 
 ```
 
 ### Graphql
 ```ruby
 Rails.application.routes.draw do
+  mount_devise_token_auth_for 'User', at: 'auth'
+  
   root to: 'home#index'
 
   namespace :api do
@@ -45,6 +124,22 @@ end
 ## Serializers
 ### REST
 ```ruby
+class ArticleSerializer < ApplicationSerializer
+  attributes :title, :content
+
+  belongs_to :user
+  has_many :comments
+  has_many :likes
+end
+```
+
+```ruby
+class CommentSerializer < ApplicationSerializer
+  attributes :content
+
+  belongs_to :user
+  belongs_to :article
+end
 
 ```
 
