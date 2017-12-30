@@ -1,38 +1,48 @@
 <template>
   <article-layout>
+    <loader v-if='loading' />
     <article-card
+      v-else
+      v-for='article in articles'
       :key='article.id'
       :article='article'
       :deleteArticle='deleteArticle'
-      v-for='article in articles'
     />
     <empty-list v-if='showEmptyList' />
   </article-layout>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { articles } from 'graphql/articles'
 import { isEmpty } from 'lodash'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleCard from './ArticleCard'
 import EmptyList from 'components/EmptyList'
+import Loader from 'components/Loader'
 
 export default {
+  data: () => ({
+    loading: 0
+  }),
+  apollo: {
+    articles: {
+      query: articles,
+    }
+  },
   components: {
     ArticleLayout,
     ArticleCard,
     EmptyList,
+    Loader,
   },
   computed: {
-    ...mapGetters(['articles']),
     showEmptyList () {
-      return isEmpty(this.  articles)
+      return isEmpty(this.articles) && !this.loading
     }
   },
   methods: {
-    ...mapActions(['deleteArticle']),
     deleteArticle (article) {
-      this.$store.dispatch('deleteArticle', article)
+
     }
   }
 }

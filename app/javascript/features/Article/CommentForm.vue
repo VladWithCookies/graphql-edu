@@ -18,21 +18,20 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-
 export default {
-  computed: mapGetters(['newComment']),
+  data: () => ({
+    newComment: {
+      content: ''
+    }
+  }),
   methods: {
-    ...mapActions(['createComment']),
     createComment () {
       const newComment = this.newComment
 
       if (!newComment.content) return
-
-      this.$store.dispatch('createComment')
     },
     resetNewComment () {
-      this.$store.dispatch('resetNewComment')
+
     }
   }
 }

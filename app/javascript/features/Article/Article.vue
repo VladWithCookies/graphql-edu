@@ -1,14 +1,15 @@
 <template>
   <article-layout>
-    <div class='ui'>
-      <div class='ui fluid image'>
+    <loader v-if='loading' />
+    <div v-else class='ui'>
+      <!--<div class='ui fluid image'>
         <img :src='article.imageSrc' />
-      </div>
+      </div>-->
       <div class='ui divider' />
       <div class='ui grid'>
-        <statistic label='Views' :value='368' />
-        <statistic label='Likes' :value='42' />
-        <statistic label='Comments' :value='commentCount' />
+        <statistic label='Views' :value='"N/A"' />
+        <statistic label='Likes' :value='article.likes.length' />
+        <statistic label='Comments' :value='"N/A"' />
       </div>
       <div class='ui divider' />
       <div class='ui header'>{{article.title}}</div>
@@ -27,17 +28,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { article } from 'graphql/articles'
 import ArticleLayout from 'components/ArticleLayout'
 import CommentForm from './CommentForm'
 import Statistic from './Statistic'
 import Comment from './Comment'
+import Loader from 'components/Loader'
 
 export default {
+  data: () => ({
+    loading: 0
+  }),
+  apollo: {
+    article: {
+      query: article,
+      variables () {
+        return { id: this.id }
+      }
+    }
+  },
   computed: {
-    ...mapGetters(['article']),
-    commentCount () {
-      return this.article.comments.length
+    id () {
+      return this.$route.params.id
     }
   },
   components: {
@@ -45,6 +57,7 @@ export default {
     CommentForm,
     Statistic,
     Comment,
+    Loader,
   }
 }
 </script>

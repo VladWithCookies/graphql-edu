@@ -19,7 +19,7 @@
     <div class='extra content'>
       <span class='left floated'>
         <i class='like icon'></i>
-        42
+        {{likesCount}}
       </span>
       <span class='ml-10'>
         <i class='comment icon' />
@@ -43,10 +43,13 @@
     props: ['article', 'deleteArticle'],
     computed: {
       timeSinceCreation () {
-        return moment(this.article.date).fromNow()
+        return moment(this.article.created_at).fromNow()
       },
       commentsCount () {
-        return this.article.comments.length
+        return 42
+      },
+      likesCount () {
+        return 42
       },
       articleDescription () {
         return truncate(this.article.content, { length: 400 })

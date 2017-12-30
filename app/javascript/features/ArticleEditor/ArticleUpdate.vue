@@ -1,6 +1,8 @@
 <template>
   <article-layout>
+    <loader v-if='loading' />
     <article-form
+      v-else
       :article='article'
       :onSubmit='updateArticle'
       :onCancel='() => 42'
@@ -9,24 +11,37 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { editArticle } from 'graphql/articles'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleForm from 'components/ArticleForm'
+import Loader from 'components/Loader'
 
 export default {
-  computed: mapGetters(['article']),
+  data: () => ({
+    loading: 0
+  }),
+  apollo: {
+    article: {
+      query: editArticle,
+      variables () {
+        return { id: this.id }
+      }
+    }
+  },
+  computed: {
+    id () {
+      return this.$route.params.id
+    }
+  },
   methods: {
     updateArticle () {
-      const article = this.article
-
-      if (!article.content || !article.title) return
-
-      this.$router.push(`/articles/${article.id}`)
+      if (!this.article.content || !this.article.title) return
     }
   },
   components: {
     ArticleLayout,
     ArticleForm,
+    Loader,
   }
 }
 </script>
