@@ -7,6 +7,12 @@ export const articles = gql`
       title
       content
       created_at
+      author {
+        first_name
+        last_name
+      }
+      commentsCount
+      likesCount
     }
   }
 `
@@ -17,6 +23,14 @@ export const article = gql`
       title
       content
       likes {
+        user {
+          first_name
+          last_name
+        }
+      }
+      comments {
+        content
+        created_at
         user {
           first_name
           last_name

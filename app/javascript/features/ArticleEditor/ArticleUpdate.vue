@@ -24,13 +24,8 @@ export default {
     article: {
       query: editArticle,
       variables () {
-        return { id: this.id }
+        return { id: this.$route.params.id }
       }
-    }
-  },
-  computed: {
-    id () {
-      return this.$route.params.id
     }
   },
   methods: {

@@ -9,7 +9,7 @@
       <div class='ui grid'>
         <statistic label='Views' :value='"N/A"' />
         <statistic label='Likes' :value='article.likes.length' />
-        <statistic label='Comments' :value='"N/A"' />
+        <statistic label='Comments' :value='article.comments.length' />
       </div>
       <div class='ui divider' />
       <div class='ui header'>{{article.title}}</div>
@@ -43,13 +43,8 @@ export default {
     article: {
       query: article,
       variables () {
-        return { id: this.id }
+        return { id: this.$route.params.id }
       }
-    }
-  },
-  computed: {
-    id () {
-      return this.$route.params.id
     }
   },
   components: {

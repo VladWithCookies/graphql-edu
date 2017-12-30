@@ -4,7 +4,9 @@
       <div class='author'>
         <div class="right floated meta">{{timeSinceCreation}}</div>
         <img class='avatar' src='https://picsum.photos/200' />
-        <span class='ml-10 meta'>{{article.author}}</span>
+        <span class='ml-10 meta'>
+          {{article.author.first_name}} {{article.author.last_name}}
+        </span>
       </div>
     </div>
     <router-link :to="{ name: 'article', params: { id: article.id } }" class='fluid image'>
@@ -19,11 +21,11 @@
     <div class='extra content'>
       <span class='left floated'>
         <i class='like icon'></i>
-        {{likesCount}}
+        {{article.likesCount}}
       </span>
       <span class='ml-10'>
         <i class='comment icon' />
-        {{commentsCount}}
+        {{article.commentsCount}}
       </span>
       <span @click='deleteArticle(article)' class='right floated cursor-pointer'>
         <i class='trash icon' />
@@ -44,12 +46,6 @@
     computed: {
       timeSinceCreation () {
         return moment(this.article.created_at).fromNow()
-      },
-      commentsCount () {
-        return 42
-      },
-      likesCount () {
-        return 42
       },
       articleDescription () {
         return truncate(this.article.content, { length: 400 })

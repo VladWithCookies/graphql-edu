@@ -17,4 +17,12 @@ ArticleType = GraphQL::ObjectType.define do
   field :comments, !types[CommentType] do
     resolve -> (article, args, ctx) { article.comments }
   end
+
+  field :commentsCount, !types.Int do
+    resolve -> (article, args, ctx) { article.comments.count }
+  end
+
+  field :likesCount, !types.Int do
+    resolve -> (article, args, ctx) { article.likes.count }
+  end
 end
