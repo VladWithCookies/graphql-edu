@@ -97,10 +97,14 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'auth'
 
   root to: 'home#index'
-
-  resources :articles, except: :edit do
-    resources :comments, only: %i(create)
-    resources :likes, only: %i(crete destroy)
+  
+  namespace :api do
+    namespace :v1 do
+      resources :articles, except: :edit do
+        resources :comments, only: %i(create)
+        resources :likes, only: %i(crete destroy)
+      end
+    end
   end
 end
 
@@ -141,6 +145,18 @@ class CommentSerializer < ApplicationSerializer
   belongs_to :article
 end
 
+class UserSerializer < ApplicationSerializer
+  attributes :email, :first_name, :last_name
+  
+  has_many :articles
+  has_many :comments
+  has_many :likes
+end
+
+class LikeSerializer < ApplicationSerializer
+  belongs_to :user
+  belongs_to :article
+end
 ```
 
 ### Graphql
