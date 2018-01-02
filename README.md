@@ -5,15 +5,15 @@
 REST in rails has sepparate controller for each resource and ```index```, ```show```, ```create```, ```update```, ```destroy``` actions.
 ```ruby
 class ArticlesController < ApplicationController
-  before_action :find_article, except: %I(index create)
+  before_action :find_article, except: %i(index create)
 
   def index
     @articles = Article.all
-    render json: @articles.includes(:user, :comments)
+    render json: @articles.includes(:users, comments: :user, likes: :user)
   end
 
   def show
-    render json: @article.includes(:user, :comments)
+    render json: @article.includes(:users, comments: :user, likes: :user)
   end
 
   def create
@@ -63,11 +63,11 @@ end
 ```ruby
 class LikesController < ApplicationController
   def create
-    Like.create(user: current_user, article: params[:article_id])
+    Like.create!(user: current_user, article: params[:article_id])
   end
 
   def destroy
-    Like.find(params[:like_id])
+    Like.destory(params[:like_id])
   end
 end
 
