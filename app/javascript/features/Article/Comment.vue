@@ -4,7 +4,9 @@
       <img src='https://picsum.photos/200'>
     </a>
     <div class='content'>
-      <a class='author'>{{comment.author}}</a>
+      <a class='author'>
+        {{comment.user.first_name}} {{comment.user.last_name}}
+      </a>
       <div class='metadata'>
         <span class='date'>{{timeSinceCreation}}</span>
       </div>
@@ -20,7 +22,7 @@ export default {
   props: ['comment'],
   computed: {
     timeSinceCreation () {
-      return moment(this.comment.date).fromNow()
+      return moment(this.comment.created_at).fromNow()
     }
   }
 }

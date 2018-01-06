@@ -6,11 +6,8 @@ class Resolvers::UpdateArticle < GraphQL::Function
   type ArticleType
 
   def call(obj, args, ctx)
-    Article
-      .find(args[:id])
-      .update!(
-        title: args[:title],
-        content: args[:content]
-      )
+    article = Article.find(args[:id])
+    article.update!(title: args[:title], content: args[:content])
+    article
   end
 end

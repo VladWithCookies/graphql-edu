@@ -13,8 +13,9 @@
 </template>
 
 <script>
-import { articles } from 'graphql/articles'
-import { isEmpty } from 'lodash'
+import { ALL_ARTICLES, DESTROY_ARTICLE } from 'graphql/articles'
+import { isEmpty, remove } from 'lodash'
+import { destroyArticle } from 'graphql/articles'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleCard from './ArticleCard'
 import EmptyList from 'components/EmptyList'
@@ -26,7 +27,7 @@ export default {
   }),
   apollo: {
     articles: {
-      query: articles,
+      query: ALL_ARTICLES,
     }
   },
   components: {
@@ -42,7 +43,19 @@ export default {
   },
   methods: {
     deleteArticle (article) {
+      this.$apollo.mutate({
+        mutation: DESTROY_ARTICLE,
+        variables: {
+          id: article.id
+        },
+        update: (store) => {
+          const query = { query: ALL_ARTICLES }
+          const data = store.readQuery(query)
 
+          remove(data.articles, ({ id }) => id === article.id)
+          store.writeQuery({ ...query, data })
+        }
+      })
     }
   }
 }
