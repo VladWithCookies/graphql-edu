@@ -2,9 +2,9 @@
   <article-layout>
     <loader v-if='loading' />
     <div v-else class='ui'>
-      <!--<div class='ui fluid image'>
-        <img :src='article.imageSrc' />
-      </div>-->
+      <div class='ui fluid image'>
+        <img src='https://picsum.photos/g/900/600' />
+      </div>
       <div class='ui divider' />
       <div class='ui grid'>
         <statistic label='Views' :value='"N/A"' />
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { article } from 'graphql/articles'
+import { ARTICLE } from 'graphql/articles'
 import ArticleLayout from 'components/ArticleLayout'
 import CommentForm from './CommentForm'
 import Statistic from './Statistic'
@@ -37,11 +37,15 @@ import Loader from 'components/Loader'
 
 export default {
   data: () => ({
-    loading: 0
+    loading: 0,
+    article: {
+      comments: [],
+      likes: 0
+    }
   }),
   apollo: {
     article: {
-      query: article,
+      query: ARTICLE,
       variables () {
         return { id: this.$route.params.id }
       }

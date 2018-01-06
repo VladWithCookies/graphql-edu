@@ -10,6 +10,7 @@
 
 <script>
 import moment from 'moment'
+import { CREATE_ARTICLE, ALL_ARTICLES } from 'graphql/articles'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleForm from 'components/ArticleForm'
 
@@ -26,9 +27,25 @@ export default {
   },
   methods: {
     createArticle () {
-      const newArticle = this.newArticle
+      const { title, content } = this.newArticle
 
-      if (!newArticle.content || !newArticle.title) return
+      if (!content || !title) return
+      this.$apollo.mutate({
+        mutation: CREATE_ARTICLE,
+        variables: {
+          title,
+          content
+        },
+        update: (store, { data: { createArticle } }) => {
+          const query = { query: ALL_ARTICLES }
+          const data = store.readQuery(query)
+
+          data.articles.push(createArticle)
+          store.writeQuery({ ...query, data })
+        }
+      }).then(({ data }) =>
+        this.$router.push({ path: `/articles/${data.createArticle.id}` })
+      )
     },
     resetNewArticle() {
       this.newArticle = { content: '', title: '' }

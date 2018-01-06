@@ -10,7 +10,7 @@
       </div>
     </div>
     <router-link :to="{ name: 'article', params: { id: article.id } }" class='fluid image'>
-      <img :src='article.imageSrc' v-if='article.imageSrc' />
+      <img src='https://picsum.photos/g/900/600' />
     </router-link>
     <div class='content'>
       <router-link :to="{ name: 'article', params: { id: article.id } }" class='header'>
@@ -30,7 +30,7 @@
       <span @click='deleteArticle(article)' class='right floated cursor-pointer'>
         <i class='trash icon' />
       </span>
-      <router-link  :to="{ name: 'articleEdit', params: { id: article.id } }" class='right floated cursor-pointer'>
+      <router-link :to="{ name: 'articleEdit', params: { id: article.id } }" class='right floated cursor-pointer'>
         <i class='pencil icon' />
       </router-link>
     </div>
