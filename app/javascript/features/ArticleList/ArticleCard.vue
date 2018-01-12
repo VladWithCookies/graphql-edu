@@ -39,7 +39,7 @@
 
 <script>
   import moment from 'moment'
-  import { truncate } from 'lodash'
+  import { truncate } from 'utils'
 
   export default {
     props: ['article', 'deleteArticle'],

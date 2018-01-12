@@ -29,6 +29,7 @@ export const ARTICLE = gql`
         }
       }
       comments {
+        id
         content
         created_at
         user {

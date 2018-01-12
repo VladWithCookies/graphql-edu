@@ -11,8 +11,13 @@ Vue.use(VueRouter)
 export default new VueRouter({
   routes: [
     {
-      path: '/',
-      component: ArticleList
+      path: '*',
+      redirect: '/articles'
+    },
+    {
+      path: '/articles',
+      name: 'articles',
+      component: ArticleList,
     },
     {
       path: '/editor',

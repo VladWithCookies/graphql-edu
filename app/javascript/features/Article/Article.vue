@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ARTICLE } from 'graphql/articles'
+import { ARTICLE } from 'graphql'
 import ArticleLayout from 'components/ArticleLayout'
 import CommentForm from './CommentForm'
 import Statistic from './Statistic'

@@ -10,7 +10,7 @@
 
 <script>
 import moment from 'moment'
-import { CREATE_ARTICLE, ALL_ARTICLES } from 'graphql/articles'
+import { CREATE_ARTICLE, ALL_ARTICLES } from 'graphql'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleForm from 'components/ArticleForm'
 
