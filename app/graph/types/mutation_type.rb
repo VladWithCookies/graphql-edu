@@ -9,4 +9,5 @@ MutationType = GraphQL::ObjectType.define do
   field :destroyLike, function: Resolvers::DestroyLike.new
 
   field :createComment, function: Resolvers::CreateComment.new
+  field :destroyComment, function: Resolvers::DestroyComment.new
 end

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { EDIT_ARTICLE, UPDATE_ARTICLE, ARTICLE } from 'graphql/articles'
+import { EDIT_ARTICLE, UPDATE_ARTICLE, ARTICLE } from 'graphql'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleForm from 'components/ArticleForm'
 import Loader from 'components/Loader'
@@ -60,7 +60,7 @@ export default {
       )
     },
     cancelEditing () {
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/articles' })
     }
   },
   components: {

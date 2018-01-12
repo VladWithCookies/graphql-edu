@@ -18,8 +18,7 @@
 </template>
 
 <script>
-import { CREATE_COMMENT } from 'graphql/comments'
-import { ARTICLE } from 'graphql/articles'
+import { ARTICLE, CREATE_COMMENT } from 'graphql'
 
 export default {
   data: () => ({

@@ -13,9 +13,8 @@
 </template>
 
 <script>
-import { ALL_ARTICLES, DESTROY_ARTICLE } from 'graphql/articles'
-import { isEmpty, remove } from 'lodash'
-import { destroyArticle } from 'graphql/articles'
+import { ALL_ARTICLES, DESTROY_ARTICLE } from 'graphql'
+import { isEmpty, remove } from 'utils'
 import ArticleLayout from 'components/ArticleLayout'
 import ArticleCard from './ArticleCard'
 import EmptyList from 'components/EmptyList'

@@ -1,6 +1,6 @@
 <template>
   <div class='ui text menu'>
-    <router-link to='/'>
+    <router-link to='/articles'>
       <div class='header item'>Logonegro</div>
     </router-link>
     <div class='right menu'>

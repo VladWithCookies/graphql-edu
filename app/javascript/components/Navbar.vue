@@ -1,7 +1,7 @@
 <template>
   <div class='navbar mb-60 mt-60'>
-    <router-link to='/'>Home</router-link>
-    <router-link to='/editor'>Editor</router-link>
+    <router-link active-class='active' to='/articles'>Home</router-link>
+    <router-link active-class='active' to='/editor'>Editor</router-link>
   </div>
 </template>
 
@@ -20,4 +20,9 @@
   background-color: #1B1C1D;
   color: #fff;
 }
+.active {
+  background-color: #1B1C1D;
+  color: #fff !important;
+}
+
 </style>
