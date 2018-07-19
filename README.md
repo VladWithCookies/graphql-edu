@@ -76,14 +76,11 @@ end
 ### Graphql
 Graphq in rails has single controller for all api requests and single action.
 ```ruby
-class Api::V1::GraphqlsController < ApplicationController
-  before_action :authenticate_user!
-
+class GraphqlsController < ApplicationController
   def create
     query_string = params[:query]
     query_variables = params[:variables] || {}
-    context = { current_user: current_user }
-    result = Schema.execute(query_string, variables: query_variables, context: context)
+    result = Schema.execute(query_string, variables: query_variables, context: {})
     render json: result
   end
 end
@@ -94,8 +91,6 @@ end
 ### REST
 ```ruby
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
-
   root to: 'home#index'
   
   namespace :api do
@@ -112,16 +107,10 @@ end
 
 ### Graphql
 ```ruby
-Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: 'auth'
-  
+Rails.application.routes.draw do  
   root to: 'home#index'
-
-  namespace :api do
-    namespace :v1 do
-      post "graphql" => "graphqls#create"
-    end
-  end
+  
+  post "graphql" => "graphqls#create"
 end
 ```
 
